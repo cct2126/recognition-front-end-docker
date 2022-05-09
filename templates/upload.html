@@ -1,0 +1,41 @@
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<head>
+  <title>File Upload</title>
+</head>
+<body>
+    <input type="file" id="file">
+    <p id="result">Please send your image</p>
+    <button type="button" onclick="postImage()" >Click me</button>
+    <script>
+    async function postImage() {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "image/png");
+
+      var file = document.getElementById("file").files[0]
+  
+      var reader = new FileReader();
+      reader.onloadend = function() {
+          //console.log('Encoded Base 64 File String:', reader.result);
+    
+          var data=(reader.result).split(',')[1];
+          var binaryBlob = atob(data);
+          //console.log('Encoded Binary File String:', binaryBlob);
+      }
+      reader.readAsDataURL(file);
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: file,
+        redirect: 'follow',
+      };
+      
+      fetch("/uploader", requestOptions)
+        .then(response => response.text())
+        .then(result => document.getElementById("result").innerHTML = result)
+        .catch(error => console.log('error', error));
+      }
+      </script>
+</body>
+</html>
