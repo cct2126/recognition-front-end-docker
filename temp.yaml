@@ -16,8 +16,8 @@ spec:
         app: front-test
     spec:
       containers:
-      - image: cctsui/recognition-front-end:latest
-        #imagePullPolicy: Never
+      - image: recognition-front-end
+        imagePullPolicy: Never
         name: front-test
         ports:
         - containerPort: 5100
