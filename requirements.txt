@@ -1,1 +1,3 @@
-flaskrequestsredis
+flask
+requests
+redis
