@@ -6,7 +6,7 @@
 </head>
 <body>
   <div class="container" style="position: relative;
-   background-color: lightblue;">
+   background-color: lightblue;" >
     <div class="title" style="position: relative; width: auto; height: auto; top: auto; padding-top: 80px; width: 100%; color: white; text-shadow: 5px 5px 5px black; font-family: 'Anton', sans-serif; font-size: 40px; ">
       <h1 style="text-align: center;">Object Recognition</h1>
     </div>
@@ -29,17 +29,46 @@
 
       <br>
 
-      <button type="button" onclick="postImage()" style="width: 100px; height: 50px">
+      <button type="button" onclick="postImage();get_10_imgs()" style="width: 100px; height: 50px">
           <p style="font-size: 15px; font-family: 'Arial Rounded MT Bold'">Submit!</p>
       </button>
       <p id="result" style="font-family: 'Al Nile'; font-size: 30px">Please send your image</p>
 
+        <button type="button" onclick="get_10_imgs()">emmm</button>
+
+        <img id="display1" src="">
     </div>
   </div>
 
 
     <script>
       var file;
+      var show_images = false;
+      var images_data;
+
+      async function get_10_imgs(){
+          if (!show_images) {
+              var myHeaders = new Headers();
+              myHeaders.append("Content-Type", "image/png");
+              var requestOptions = {
+                  method: 'GET',
+                  headers: myHeaders,
+                  redirect: 'follow',
+              };
+
+              fetch("/get_display_image", requestOptions)
+                  .then(response => response.text())
+                  .then(result => JSON.parse(result))
+                  {#.then(result => document.getElementById('display1').src = ("data:image/png;base64," + window.btoa(result[0]['data'])))#}
+                  .then(result => document.getElementById('display1').src = result[0]['data'])
+                  .catch(error => console.log('error', error));
+
+              show_images = true
+              console.log(images_data)
+          }else{
+
+          }
+      }
 
       async function displayimg(input){
           var file = input.files[0]
@@ -47,7 +76,9 @@
               var fr = new FileReader();
               fr.readAsDataURL(file)
               fr.onload = function (){
+                  console.log(fr.result)
                   document.getElementById('img').src = fr.result
+
               }
           }
       }
@@ -60,21 +91,25 @@
         // };
       }
 
+
       async function postImage() {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "image/png");
 
         var file = document.getElementById("selectfile").files[0]
-    
+
         var reader = new FileReader();
         reader.onloadend = function() {
             //console.log('Encoded Base 64 File String:', reader.result);
-      
+
             var data=(reader.result).split(',')[1];
             var binaryBlob = atob(data);
             //console.log('Encoded Binary File String:', binaryBlob);
         }
         reader.readAsDataURL(file);
+
+
+
 
         var requestOptions = {
           method: 'POST',
