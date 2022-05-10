@@ -5,5 +5,7 @@ print(r.keys())
 # for elem in r.keys():
 #     r.delete(elem)
 # print(r.keys())
-for elem in r.keys():
-    print(r.get(elem))
+temp = r.keys()
+for elem in temp:
+    r.get(elem)
+    print("emm")

@@ -39,8 +39,7 @@ def uploader():
     import uuid
     uuid = uuid.uuid1()
 
-    payload = str({result, myobj})
-    # print(payload)
+    payload = str({"result": result, "object": myobj})
     r.set(int(uuid), payload)
 
     return x.text
