@@ -42,8 +42,6 @@ def uploader():
     # print(payload)
     r.set(int(uuid), payload)
 
-    # print(r.get(int(uuid)))
-
     return x.text
 
 if __name__ == '__main__':

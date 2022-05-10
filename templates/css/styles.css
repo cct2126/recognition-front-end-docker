@@ -1,0 +1,258 @@
+/* styles.css 
+   Project: 
+   Author: 
+   Date: 
+	
+   Helpful links: 
+   	Web colors: 
+   		https://en.wikipedia.org/wiki/Web_colors#X11_color_names
+	Color picker tool:
+		https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Colors/Color_picker_tool
+		http://colorpicker.com
+
+*/
+
+
+* {
+   box-sizing: border-box;
+  
+}
+
+
+.container {
+   position: relative;
+   background-color: lightblue;
+}
+
+.bigpicture {
+   position: relative;
+   width: auto;
+   height: auto;
+}
+
+   .bigpicture img {
+     max-width: 100%;
+     height: auto;
+     width: auto;
+   }
+
+.title {
+   position: absolute;
+   top: auto;
+   text-align: center;
+   width: 100%;
+   color: white;
+   text-shadow: 5px 5px 5px black;
+   font-family: 'Anton', sans-serif;
+   font-size: 48px;
+   background-color: none;
+}
+
+.footnote{
+   background-color: rgba(0,0,0,0.8);
+   position: absolute;
+   font-size: 8em;
+   width: 100%;
+   bottom: 0;
+   display: none;
+}
+
+.footnote p{
+   color: white;
+   text-align: right;
+   font-size: 13px;
+   padding-right: 30px;
+   padding-top: 17px;
+   padding-bottom: 5px;
+}
+
+.bigpicture:hover{
+   cursor: pointer;
+}
+
+
+
+.section1 {
+   padding: 70px;
+   text-align: justify;
+
+}
+ 
+.h1 {
+   color: black;
+   text-align: center;
+   font-size: 20px;
+   padding-right: 30px;
+   padding-top: 17px;
+   padding-bottom: 5px;
+}
+
+.h2 {
+   text-align: center;
+}
+
+.video {
+   width: 100%;
+
+}
+
+   .video video {
+      width: 100%;
+   }
+
+
+.bigphoto {
+   width: 90%;
+   margin: auto;
+}
+
+  .bigphoto img {
+   width: 100%;
+
+  }
+
+.smallphotos {
+   width: 90%;
+   overflow: hidden;
+   margin: auto;
+}
+
+   .small {
+      float: left;
+      width: 33.3%;
+   }
+
+
+      .small img {
+         width: 100%
+      }
+
+.last:hover{
+   cursor: pointer;
+}
+
+.overlay{
+   width:100%;
+   position: fixed;
+   height: 100%;
+   top:0;
+   display: none;
+   left:0;
+   background-color: black;
+}
+
+.modal{
+   margin:40px auto;
+   border:4px solid darkred;
+   width: 90%;
+   position: relative;
+   top:65px;
+
+}
+
+.last img{
+   width: auto;
+   height: auto;
+   max-width: 100%;
+   max-height: 100%;
+}
+
+.popup-content {
+   display: flex;
+}
+
+.popup-img{
+   width: 100%
+}
+
+ .popup-img img{
+   width: auto;
+   height: auto;
+   max-width: 100%;
+   max-height: 100%;
+ }
+
+.bigcaption{
+   width: 40%;
+   padding:1%;
+   vertical-align: middle;
+   padding-top:8%;
+   padding-right:4%;
+   padding-bottom:0;
+   padding-left:0%;
+   background-color:#282e34;
+   color: white;
+}
+
+.caption h1{
+   color: grey;
+   text-transform: uppercase;
+}
+
+.caption p{
+   color: linen;
+   line-height: 1.5;
+}
+
+.close{
+   width: 100px;
+   background-color: darkgrey;
+   cursor: pointer;
+   position: absolute;
+   top:0;
+}
+
+   .close img {
+      width: 100%;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*media query for responsive design */
+
+@media only screen and (max-width: 640px) {
+
+   .section1 {
+      padding: 15px;
+
+   }
+
+   .block {
+      float: none;
+      width: 100%;
+   }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+

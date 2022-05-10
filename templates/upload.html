@@ -1,40 +1,78 @@
 <html>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <head>
-  <title>File Upload</title>
+  <title>Image Recognition</title>
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <input type="file" id="file">
-    <p id="result">Please send your image</p>
-    <button type="button" onclick="postImage()" >Click me</button>
-    <script>
-    async function postImage() {
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "image/png");
+  <div class="container">
+    <div class="title" style="position: relative; width: auto; height: auto; padding-top: 80px;">
+      <h2 style="text-align: center;">Object Recognition</h1>
+    </div>
 
-      var file = document.getElementById("file").files[0]
-  
-      var reader = new FileReader();
-      reader.onloadend = function() {
-          //console.log('Encoded Base 64 File String:', reader.result);
-    
-          var data=(reader.result).split(',')[1];
-          var binaryBlob = atob(data);
-          //console.log('Encoded Binary File String:', binaryBlob);
-      }
-      reader.readAsDataURL(file);
+    <div class="section1">
+      <h3 style="text-align:center;">Some text</h3>
+      <h3 style="text-align:center;">Please click the camera to select an image</h3>
+      <h3 style="text-align:center;">Then click the button to submit the file</h3>
+    </div>
 
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: file,
-        redirect: 'follow',
-      };
+    <div class="section2" style="text-align: center;">
       
-      fetch("/uploader", requestOptions)
-        .then(response => response.text())
-        .then(result => document.getElementById("result").innerHTML = result)
-        .catch(error => console.log('error', error));
+      <p>
+        <input type="file" id="selectfile" accept="image/png, image/jpg, image/jpeg" style="display: none;">
+      </p>
+
+      <div id="upload_zone" onclick="get_file()">
+        <img style="width:200px; height:180px;" src="images/camera.png" alt="camera">
+      </div>
+
+      <br>
+
+      <button type="button" onclick="postImage()">Submit!</button> 
+      <p id="result">Please send your image</p>
+
+    </div>
+  </div>
+
+
+    <script>
+      var file;
+
+      async function get_file() {
+        document.getElementById("selectfile").click()
+        // document.getElementById('selectfile').onchange = function() {
+        //     fileobj = document.getElementById('selectfile').files[0];
+        //     ajax_file_upload(fileobj);
+        // };
+      }
+
+      async function postImage() {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "image/png");
+
+        var file = document.getElementById("selectfile").files[0]
+    
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            //console.log('Encoded Base 64 File String:', reader.result);
+      
+            var data=(reader.result).split(',')[1];
+            var binaryBlob = atob(data);
+            //console.log('Encoded Binary File String:', binaryBlob);
+        }
+        reader.readAsDataURL(file);
+
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: file,
+          redirect: 'follow',
+        };
+        
+        fetch("/uploader", requestOptions)
+          .then(response => response.text())
+          .then(result => document.getElementById("result").innerHTML = result)
+          .catch(error => console.log('error', error));
       }
       </script>
 </body>
