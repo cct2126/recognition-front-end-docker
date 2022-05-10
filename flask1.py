@@ -10,9 +10,10 @@ import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'upload/'
+app.static_folder = 'templates/static'
 
-# r = redis.Redis(host='112.74.161.101', port=6379)
-r = redis.Redis(host='redis', port=6379)
+r = redis.Redis(host='112.74.161.101', port=32003)
+# r = redis.Redis(host='redis', port=6379)
 
 @app.route('/')
 def hello():
@@ -25,8 +26,8 @@ def upload_file():
 @app.route('/uploader',methods=['POST'])
 def uploader():
     data = request.data
-    url = 'http://recognition:5678/recog'
-    # url = 'http://localhost:5678/recog'
+    # url = 'http://recognition:5678/recog'
+    url = 'http://localhost:5678/recog'
 
     myobj = data
 

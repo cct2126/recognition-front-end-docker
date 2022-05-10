@@ -2,34 +2,37 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <head>
   <title>Image Recognition</title>
-  <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <div class="container">
-    <div class="title" style="position: relative; width: auto; height: auto; padding-top: 80px;">
-      <h2 style="text-align: center;">Object Recognition</h1>
+  <div class="container" style="position: relative;
+   background-color: lightblue;">
+    <div class="title" style="position: relative; width: auto; height: auto; top: auto; padding-top: 80px; width: 100%; color: white; text-shadow: 5px 5px 5px black; font-family: 'Anton', sans-serif; font-size: 40px; ">
+      <h1 style="text-align: center;">Object Recognition</h1>
     </div>
 
-    <div class="section1">
-      <h3 style="text-align:center;">Some text</h3>
-      <h3 style="text-align:center;">Please click the camera to select an image</h3>
-      <h3 style="text-align:center;">Then click the button to submit the file</h3>
+    <div class="section1" style="font-size: 28px; font-family: 'Arial Rounded MT Bold'" >
+      <h3 style="text-align:center;">We use PyTorch to run the image recognition using <br> ResNet50 pretrained model from ImageNet</h3>
+      <h4 style="text-align:center;">Please click the camera to select an image</h4>
+      <h4 style="text-align:center;">Then click the button to submit the file</h4>
     </div>
 
     <div class="section2" style="text-align: center;">
       
       <p>
-        <input type="file" id="selectfile" accept="image/png, image/jpg, image/jpeg" style="display: none;">
+        <input type="file" id="selectfile" accept="image/png, image/jpg, image/jpeg" style="display: none;" onchange="displayimg(this)">
       </p>
 
       <div id="upload_zone" onclick="get_file()">
-        <img style="width:200px; height:180px;" src="images/camera.png" alt="camera">
+        <img id="img" style="width:auto; height:auto; max-width: 600px" src="{{ url_for('static', filename='camera.png') }}" alt="camera">
       </div>
 
       <br>
 
-      <button type="button" onclick="postImage()">Submit!</button> 
-      <p id="result">Please send your image</p>
+      <button type="button" onclick="postImage()" style="width: 100px; height: 50px">
+          <p style="font-size: 15px; font-family: 'Arial Rounded MT Bold'">Submit!</p>
+      </button>
+      <p id="result" style="font-family: 'Al Nile'; font-size: 30px">Please send your image</p>
 
     </div>
   </div>
@@ -37,6 +40,17 @@
 
     <script>
       var file;
+
+      async function displayimg(input){
+          var file = input.files[0]
+          if(window.FileReader){
+              var fr = new FileReader();
+              fr.readAsDataURL(file)
+              fr.onload = function (){
+                  document.getElementById('img').src = fr.result
+              }
+          }
+      }
 
       async function get_file() {
         document.getElementById("selectfile").click()
