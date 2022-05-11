@@ -64,7 +64,7 @@ def uploader():
 def get_display_image():
     img_keys = r.keys()
     img_keys.sort(reverse=True)
-    img_keys = img_keys[-9:]
+    img_keys = img_keys[:9]
     img_list = {}
     i = 0
     for elem in img_keys:

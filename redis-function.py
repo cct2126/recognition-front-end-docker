@@ -7,21 +7,15 @@ print(r.keys())
 # for elem in r.keys():
 #     r.delete(elem)
 # print(r.keys())
-temp = r.keys()
-for elem in temp:
+img_keys = r.keys()
+img_keys.sort(reverse=True)
+img_keys = img_keys[:9]
 
+for elem in img_keys:
     tmp = (r.get(elem)).decode('utf-8')
-
     label = tmp.split("=")[1].split(";")[0]
     data = tmp.split("object=")[1]
-
     print(label)
-    print(data.encode('utf-8'))
 
-
-
-    # tmp = json.loads(tmp)
-    # print(tmp)
-    # print(tmp['result'])
 
 
