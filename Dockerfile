@@ -5,5 +5,5 @@ ADD . /code
 # 设置code文件夹是工作目录
 WORKDIR /code
 # 安装支持
-RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 CMD ["python3", "flask1.py"]
