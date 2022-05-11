@@ -15,9 +15,9 @@ app.static_folder = 'templates/static'
 # r = redis.Redis(host='112.74.161.101', port=32003)
 r = redis.Redis(host='redis', port=6379)
 
-@app.route('/')
+@app.route('/' ,methods=['GET'])
 def hello():
-    return 'hello docker&flask'
+    return render_template('upload.html')
 
 @app.route('/upload' ,methods=['GET'])
 def upload_file():
@@ -34,7 +34,7 @@ def uploader():
     from io import BytesIO
     img = Image.open(BytesIO(myobj)).convert('RGB')
     w, h = img.size
-    img = img.resize((int(w * 0.3), int(h * 0.3)), Image.ANTIALIAS)
+    img = img.resize((int(w * 0.5), int(h * 0.5)), Image.ANTIALIAS)
     compressed_bytes = BytesIO()
     img.save(compressed_bytes, format='jpeg')
 
@@ -47,8 +47,7 @@ def uploader():
     result = result_json['result']
     print(result)
 
-    import uuid
-    uuid = uuid.uuid1()
+    import time
 
     import base64
     base64_str = base64.b64encode(compressed_bytes.getvalue()).decode("ascii")
@@ -57,13 +56,15 @@ def uploader():
     ## payload = str({"result": result, "object": str(myobj)})
     # print(base64_str)
     payload = str("result={};object={}".format(result, base64_str))
-    r.set(int(uuid), payload)
+    r.set(int(time.time()), payload)
 
     return x.text
 
 @app.route('/get_display_image', methods=['GET'])
 def get_display_image():
-    img_keys = r.keys()[-8:]
+    img_keys = r.keys()
+    img_keys.sort(reverse=True)
+    img_keys = img_keys[-9:]
     img_list = {}
     i = 0
     for elem in img_keys:

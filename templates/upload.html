@@ -44,43 +44,43 @@
         <table style="text-align:center; width: 80%; margin: auto; border-spacing: 10px" >
             <tr>
                 <td>
-                    <img id="display0" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <img id="display0" src="{{ url_for('static', filename='white.png') }}" style="min-height:200px; max-width: 300px; display:none">
                     <p id="display0_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
                 </td>
                 <td>
-                    <img id="display1" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <img id="display1" src="{{ url_for('static', filename='white.png') }}" style="min-height:200px; max-width: 300px; display:none">
                     <p id="display1_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
                 </td>
                 <td>
-                    <img id="display2" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <img id="display2" src="{{ url_for('static', filename='white.png') }}" style="min-height:200px; max-width: 300px; display:none">
                     <p id="display2_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <img id="display3" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <img id="display3" src="{{ url_for('static', filename='white.png') }}" style="min-height:200px; max-width: 300px; display:none">
                     <p id="display3_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
                 </td>
                 <td>
-                    <img id="display4" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <img id="display4" src="{{ url_for('static', filename='white.png') }}" style="min-height:200px; max-width: 300px; display:none">
                     <p id="display4_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
                 </td>
                 <td>
-                    <img id="display5" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <img id="display5" src="{{ url_for('static', filename='white.png') }}" style="min-height:200px; max-width: 300px; display:none">
                     <p id="display5_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <img id="display6" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <img id="display6" src="{{ url_for('static', filename='white.png') }}" style="min-height:200px; max-width: 300px; display:none">
                     <p id="display6_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
                 </td>
                 <td>
-                    <img id="display7" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <img id="display7" src="{{ url_for('static', filename='white.png') }}" style="min-height:200px; max-width: 300px; display:none">
                     <p id="display7_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
                 </td>
                 <td>
-                    <img id="display8" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <img id="display8" src="{{ url_for('static', filename='white.png') }}" style="min-height:200px; max-width: 300px; display:none">
                     <p id="display8_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
                 </td>
             </tr>
@@ -113,7 +113,7 @@
                   .then(result => help_display(result))
                   .catch(error => console.log('error', error));
 
-              show_images = true
+              {#show_images = true#}
           }else{
             //Do nothing
           }
@@ -122,22 +122,31 @@
       async function help_display(result){
           try {
               document.getElementById('display0').src = result[0]['data'];
+              document.getElementById('display0').style.display = "inline";
               document.getElementById('display0_text').innerText = result[0]['label'];
               document.getElementById('display1').src = result[1]['data'];
+              document.getElementById('display1').style.display = "inline";
               document.getElementById('display1_text').innerText = result[1]['label'];
               document.getElementById('display2').src = result[2]['data'];
+              document.getElementById('display2').style.display = "inline";
               document.getElementById('display2_text').innerText = result[2]['label'];
               document.getElementById('display3').src = result[3]['data'];
+              document.getElementById('display3').style.display = "inline";
               document.getElementById('display3_text').innerText = result[3]['label'];
               document.getElementById('display4').src = result[4]['data'];
+              document.getElementById('display4').style.display = "inline";
               document.getElementById('display4_text').innerText = result[4]['label'];
               document.getElementById('display5').src = result[5]['data'];
+              document.getElementById('display5').style.display = "inline";
               document.getElementById('display5_text').innerText = result[5]['label'];
               document.getElementById('display6').src = result[6]['data'];
+              document.getElementById('display6').style.display = "inline";
               document.getElementById('display6_text').innerText = result[6]['label'];
               document.getElementById('display7').src = result[7]['data'];
+              document.getElementById('display7').style.display = "inline";
               document.getElementById('display7_text').innerText = result[7]['label'];
               document.getElementById('display8').src = result[8]['data'];
+              document.getElementById('display8').style.display = "inline";
               document.getElementById('display8_text').innerText = result[8]['label'];
 
 
