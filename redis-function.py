@@ -13,7 +13,7 @@ for elem in temp:
     tmp = (r.get(elem)).decode('utf-8')
 
     label = tmp.split("=")[1].split(";")[0]
-    data = tmp.split("b'")[1]
+    data = tmp.split("object=")[1]
 
     print(label)
     print(data.encode('utf-8'))

@@ -5,6 +5,7 @@ import requests
 import redis
 import json
 
+
 import os
 
 app = Flask(__name__)
@@ -29,8 +30,19 @@ def uploader():
     # url = 'http://localhost:5678/recog'
 
     myobj = data
+    from PIL import Image
+    from io import BytesIO
+    img = Image.open(BytesIO(myobj)).convert('RGB')
+    w, h = img.size
+    img = img.resize((int(w * 0.3), int(h * 0.3)), Image.ANTIALIAS)
+    compressed_bytes = BytesIO()
+    img.save(compressed_bytes, format='jpeg')
 
-    x = requests.post(url, data=myobj)
+    # nimg = Image.open(BytesIO(compressed_bytes.getvalue()))
+    # print(compressed_bytes.tell())
+    # nimg.show()
+    x = requests.post(url, data=compressed_bytes.getvalue())
+
     result_json = json.loads(x.text)
     result = result_json['result']
     print(result)
@@ -39,11 +51,11 @@ def uploader():
     uuid = uuid.uuid1()
 
     import base64
-    base64_str = base64.b64encode(myobj).decode("ascii")
+    base64_str = base64.b64encode(compressed_bytes.getvalue()).decode("ascii")
     base64_str = 'data:image/jpeg;base64,' + base64_str
 
     ## payload = str({"result": result, "object": str(myobj)})
-    print(base64_str)
+    # print(base64_str)
     payload = str("result={};object={}".format(result, base64_str))
     r.set(int(uuid), payload)
 

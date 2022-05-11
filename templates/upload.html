@@ -34,9 +34,58 @@
       </button>
       <p id="result" style="font-family: 'Al Nile'; font-size: 30px">Please send your image</p>
 
-        <button type="button" onclick="get_10_imgs()">emmm</button>
+        <button type="button" onclick="get_10_imgs()" style="width: 150px; height: 50px">
+            <p style="font-size: 14px; font-family: 'Arial Rounded MT Bold'">I'm Feeling Lucky</p>
+        </button>
+    </div>
 
-        <img id="display1" src="">
+    <div class="section3" style="text-align: center; width: 100%; min-height: 500px; margin-top: 60px">
+
+        <table style="text-align:center; width: 80%; margin: auto; border-spacing: 10px" >
+            <tr>
+                <td>
+                    <img id="display0" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <p id="display0_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
+                </td>
+                <td>
+                    <img id="display1" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <p id="display1_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
+                </td>
+                <td>
+                    <img id="display2" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <p id="display2_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img id="display3" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <p id="display3_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
+                </td>
+                <td>
+                    <img id="display4" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <p id="display4_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
+                </td>
+                <td>
+                    <img id="display5" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <p id="display5_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img id="display6" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <p id="display6_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
+                </td>
+                <td>
+                    <img id="display7" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <p id="display7_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
+                </td>
+                <td>
+                    <img id="display8" src="{{ url_for('static', filename='white.png') }}" style="max-width: 300px">
+                    <p id="display8_text" style="font-family: 'Arial Unicode MS', sans-serif"></p>
+                </td>
+            </tr>
+        </table>
+
     </div>
   </div>
 
@@ -59,15 +108,49 @@
               fetch("/get_display_image", requestOptions)
                   .then(response => response.text())
                   .then(result => JSON.parse(result))
-                  {#.then(result => document.getElementById('display1').src = ("data:image/png;base64," + window.btoa(result[0]['data'])))#}
-                  .then(result => document.getElementById('display1').src = result[0]['data'])
+                  {#.then(result => document.getElementById('display1').src = result[0]['data'])#}
+
+                  .then(result => help_display(result))
                   .catch(error => console.log('error', error));
 
               show_images = true
-              console.log(images_data)
           }else{
+            //Do nothing
+          }
+      }
+
+      async function help_display(result){
+          try {
+              document.getElementById('display0').src = result[0]['data'];
+              document.getElementById('display0_text').innerText = result[0]['label'];
+              document.getElementById('display1').src = result[1]['data'];
+              document.getElementById('display1_text').innerText = result[1]['label'];
+              document.getElementById('display2').src = result[2]['data'];
+              document.getElementById('display2_text').innerText = result[2]['label'];
+              document.getElementById('display3').src = result[3]['data'];
+              document.getElementById('display3_text').innerText = result[3]['label'];
+              document.getElementById('display4').src = result[4]['data'];
+              document.getElementById('display4_text').innerText = result[4]['label'];
+              document.getElementById('display5').src = result[5]['data'];
+              document.getElementById('display5_text').innerText = result[5]['label'];
+              document.getElementById('display6').src = result[6]['data'];
+              document.getElementById('display6_text').innerText = result[6]['label'];
+              document.getElementById('display7').src = result[7]['data'];
+              document.getElementById('display7_text').innerText = result[7]['label'];
+              document.getElementById('display8').src = result[8]['data'];
+              document.getElementById('display8_text').innerText = result[8]['label'];
+
+
+
+
+
 
           }
+          catch (err){
+              // Do Nothing
+          }
+          this.images_data = result
+
       }
 
       async function displayimg(input){
@@ -85,10 +168,6 @@
 
       async function get_file() {
         document.getElementById("selectfile").click()
-        // document.getElementById('selectfile').onchange = function() {
-        //     fileobj = document.getElementById('selectfile').files[0];
-        //     ajax_file_upload(fileobj);
-        // };
       }
 
 
@@ -102,8 +181,8 @@
         reader.onloadend = function() {
             //console.log('Encoded Base 64 File String:', reader.result);
 
-            var data=(reader.result).split(',')[1];
-            var binaryBlob = atob(data);
+            {#var data=(reader.result).split(',')[1];#}
+            {#var binaryBlob = atob(data);#}
             //console.log('Encoded Binary File String:', binaryBlob);
         }
         reader.readAsDataURL(file);
